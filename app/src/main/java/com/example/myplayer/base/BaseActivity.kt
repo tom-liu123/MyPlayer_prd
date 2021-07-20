@@ -3,9 +3,9 @@ package com.example.myplayer.base
 import android.os.Bundle
 import android.view.AbsSavedState
 import androidx.appcompat.app.AppCompatActivity
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.debug
-import org.jetbrains.anko.toast
+import com.example.myplayer.ui.activity.MainActivity
+import com.example.myplayer.util.ToolBarManager
+import org.jetbrains.anko.*
 
 /**
  * 所有activity的基类
@@ -21,15 +21,15 @@ abstract class BaseActivity :AppCompatActivity(),AnkoLogger{
     /**
      * 初始化数据
      */
-
-    private fun initData() {
+//kontlin中前面加上open关键字才能够在子类中复写
+    open protected fun initData() {
 
     }
 
     /**
      * adapter和listener操作
      */
-    protected fun initListener() {
+    open protected fun initListener() {
 
     }
 
@@ -45,5 +45,15 @@ abstract class BaseActivity :AppCompatActivity(),AnkoLogger{
         runOnUiThread {
             toast(msg)
         }
+    }
+
+    /**
+     * 开启activity并且finish当前界面
+     */
+    //传入一个泛型T，activity可以发生变化
+    inline fun <reified T:BaseActivity>startActivityAndFinish(){
+        startActivity<T>()
+        finish()
+
     }
 }
