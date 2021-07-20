@@ -6,7 +6,9 @@ import androidx.appcompat.widget.Toolbar
 
 import com.example.myplayer.R
 import com.example.myplayer.base.BaseActivity
+import com.example.myplayer.util.FragmentUtil
 import com.example.myplayer.util.ToolBarManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 import org.jetbrains.anko.find
 
@@ -24,6 +26,15 @@ class MainActivity : BaseActivity(), ToolBarManager {
 
     override fun initData() {
         initMainToolBar()
+    }
+
+    override fun initListener() {
+        //设置tab的监听事件
+        bottomBar.setOnTabSelectListener {
+            var transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.container, FragmentUtil.fragmentUtil.getFragment(it)!!,it.toString())
+            transaction.commit()
+        }
     }
 
 }
