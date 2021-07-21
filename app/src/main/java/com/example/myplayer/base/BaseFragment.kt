@@ -50,13 +50,13 @@ abstract class BaseFragment:Fragment() ,AnkoLogger{
     /**
      * 数据的初始化
      */
-    protected fun initData() {
+    open protected fun initData() {
     }
 
     /**
      * adapter和listener的操作
      */
-    protected fun initListener() {
+    open protected fun initListener() {
     }
 
     fun myToast(msg:String){
