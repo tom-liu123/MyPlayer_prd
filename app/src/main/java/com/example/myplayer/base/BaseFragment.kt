@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.runOnUiThread
+import org.jetbrains.anko.toast
 
 /**
  * 所有fragment的基类
@@ -60,7 +61,7 @@ abstract class BaseFragment:Fragment() ,AnkoLogger{
     }
 
     fun myToast(msg:String){
-        context?.runOnUiThread { myToast(msg) }
+        context?.runOnUiThread { toast(msg) }
     }
 
 }
