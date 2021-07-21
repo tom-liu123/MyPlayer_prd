@@ -12,20 +12,22 @@ public class URLProviderUtils {
      * @return url
      */
     public static String getHomeUrl(int offset, int size) {
-        String url = "http://mapi.yinyuetai.com/suggestions/front_page.json?deviceinfo="
-                + "{\"aid\":\"10201036\",\"os\":\"Android\","
-                + "\"ov\":" + "\"" + getSystemVersion() + "\"" + ","
-                + "\"rn\":\"480*800\","
-                + "\"dn\":" + "\"" + getPhoneModel() + "\"" + ","
-                + "\"cr\":\"46000\","
-                + "\"as\":"
-                + "\"WIFI\","
-                + "\"uid\":"
-                + "\"dbcaa6c4482bc05ecb0bf39dabf207d2\","
-                + "\"clid\":110025000}"
-                + "&offset=" + offset
-                + "&size=" + size
-                + "&v=4&rn=640*540";
+//        String url = "http://mapi.yinyuetai.com/suggestions/front_page.json?deviceinfo="
+//                + "{\"aid\":\"10201036\",\"os\":\"Android\","
+//                + "\"ov\":" + "\"" + getSystemVersion() + "\"" + ","
+//                + "\"rn\":\"480*800\","
+//                + "\"dn\":" + "\"" + getPhoneModel() + "\"" + ","
+//                + "\"cr\":\"46000\","
+//                + "\"as\":"
+//                + "\"WIFI\","
+//                + "\"uid\":"
+//                + "\"dbcaa6c4482bc05ecb0bf39dabf207d2\","
+//                + "\"clid\":110025000}"
+//                + "&offset=" + offset
+//                + "&size=" + size
+//                + "&v=4&rn=640*540";
+
+        String url ="http://8.140.181.177:8088/#/pages/table/table?id=LWBJ&name=北京区总&date=";
         Log.i("Main_url", url);
         return url;
     }

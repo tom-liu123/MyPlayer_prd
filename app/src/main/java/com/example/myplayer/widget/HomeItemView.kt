@@ -1,10 +1,14 @@
 package com.example.myplayer.widget
 
 import android.content.Context
+import android.icu.number.NumberFormatter.with
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import com.example.myplayer.R
+import com.itheima.player.model.bean.HomeItemBean
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_home.view.*
 
 class HomeItemView:RelativeLayout {
     constructor(context: Context?) : super(context)
@@ -20,5 +24,18 @@ class HomeItemView:RelativeLayout {
      */
     init {
         View.inflate(context, R.layout.item_home,this)
+    }
+    /*
+    刷新条目view数据
+     */
+    fun setData(data: HomeItemBean) {
+        //歌曲名称
+        title.setText(data.title)
+        //简介
+        desc.setText(data.description)
+        //背景图片
+
+        Picasso.with(context).load(data.posterPic).into(bg)
+
     }
 }

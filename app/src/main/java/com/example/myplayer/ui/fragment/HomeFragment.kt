@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myplayer.R
 import com.example.myplayer.adapter.HomeAdapter
 import com.example.myplayer.base.BaseFragment
+import com.example.myplayer.util.ThreadUtil
 import com.example.myplayer.util.URLProviderUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -14,6 +15,8 @@ import okhttp3.*
 import java.io.IOException
 
 class HomeFragment : BaseFragment() {
+    //适配
+    val adapter by lazy { HomeAdapter() }
     override fun initView(): View? {
         return View.inflate(context, R.layout.fragment_home,null)
     }
@@ -21,8 +24,7 @@ class HomeFragment : BaseFragment() {
     override fun initListener() {
         //初始化recycleview
         recycleView.layoutManager = LinearLayoutManager(context)
-        //适配
-        val adapter=HomeAdapter()
+
         recycleView.adapter = adapter
 
     }
@@ -55,7 +57,13 @@ class HomeFragment : BaseFragment() {
                 val goson = Gson()
                val list=goson.fromJson<List<HomeItemBean>>(result,object :TypeToken<List<HomeItemBean>>(){}.type)
 
-                println("数据操作成功："+list.size)
+                //刷新列表
+
+                ThreadUtil.runOnMainThread(object :Runnable{
+                    override fun run() {
+                        adapter.updateList(list)
+                    }
+                })
 
             }
         })
