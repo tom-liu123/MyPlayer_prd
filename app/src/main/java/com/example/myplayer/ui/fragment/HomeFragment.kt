@@ -35,13 +35,20 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadDatas() {
-        val  path = URLProviderUtils.getHomeUrl(0,20)
+        val  path = URLProviderUtils.getHomeUrl(0,2)
+
+        println("path=================="+path)
 
        val client= OkHttpClient()
         val request = Request.Builder()
             .url(path)
             .get()
             .build()
+
+        println("request==============="+request)
+        /**
+         * 添加到队列中
+         */
         client.newCall(request).enqueue(object :Callback{
             /**
              * 在子线程中调用
@@ -53,10 +60,12 @@ class HomeFragment : BaseFragment() {
             override fun onResponse(call: Call, response: Response) {
                 myToast("获取数据成功")
                 val result = response.body?.string()
+                println("result===================="+result)
 
                 val goson = Gson()
                val list=goson.fromJson<List<HomeItemBean>>(result,object :TypeToken<List<HomeItemBean>>(){}.type)
 
+                println("list=================="+list)
                 //刷新列表
 
                 ThreadUtil.runOnMainThread(object :Runnable{

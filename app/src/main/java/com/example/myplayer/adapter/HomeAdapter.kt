@@ -16,14 +16,13 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
     fun updateList(list:List<HomeItemBean>){
     this.list.clear()
     this.list.addAll(list)
+        //notifyDataSetChanged方法强制listview调用getView来刷新每个Item的内容
     notifyDataSetChanged()
 
     }
 
 
-    class HomeHolder(itmeView:View):RecyclerView.ViewHolder(itmeView){
 
-    }
 
 
 
@@ -43,5 +42,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeHolder {
         return HomeHolder(HomeItemView(parent?.context))
     }
+    class HomeHolder(itmeView:View):RecyclerView.ViewHolder(itmeView){
 
+    }
 }

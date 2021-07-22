@@ -27,7 +27,8 @@ public class URLProviderUtils {
 //                + "&size=" + size
 //                + "&v=4&rn=640*540";
 
-        String url ="http://8.140.181.177:8088/#/pages/table/table?id=LWBJ&name=北京区总&date=";
+        String url ="http://10.16.244.196:8088/api/info/one?userId=" +
+                "10052198";
         Log.i("Main_url", url);
         return url;
     }
