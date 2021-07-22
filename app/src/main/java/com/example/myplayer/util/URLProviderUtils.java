@@ -27,7 +27,7 @@ public class URLProviderUtils {
 //                + "&size=" + size
 //                + "&v=4&rn=640*540";
 
-        String url ="http://10.16.244.196:8088/api/info/one?userId=" +
+        String url ="http://10.16.244.196:8088/api/info/oneMe?userId=" +
                 "10052198";
         Log.i("Main_url", url);
         return url;

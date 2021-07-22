@@ -8,6 +8,8 @@ import com.example.myplayer.base.BaseFragment
 import com.example.myplayer.util.ThreadUtil
 import com.example.myplayer.util.URLProviderUtils
 import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import com.itheima.player.model.bean.HomeItemBean
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -28,6 +30,7 @@ class HomeFragment : BaseFragment() {
         recycleView.adapter = adapter
 
     }
+
 
     override fun initData() {
         //初始化
