@@ -22,6 +22,13 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
 
     }
 
+    /**
+     * 加载更多
+     */
+    fun loadMore(list:List<HomeItemBean>){
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
 
 
 

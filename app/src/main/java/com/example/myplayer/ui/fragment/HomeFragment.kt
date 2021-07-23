@@ -3,6 +3,7 @@ package com.example.myplayer.ui.fragment
 import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myplayer.R
 import com.example.myplayer.adapter.HomeAdapter
 import com.example.myplayer.base.BaseFragment
@@ -40,6 +41,41 @@ class HomeFragment : BaseFragment() {
 
             loadDatas()
         }
+        //监听列表滑动
+        recycleView.setOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                when(newState){
+//                    RecyclerView.SCROLL_STATE_IDLE->{
+//                        println("idel")
+//                    }
+//                    RecyclerView.SCROLL_STATE_DRAGGING->{
+//                        println("drag")
+//                    }
+//                    RecyclerView.SCROLL_STATE_SETTLING->{
+//                        println("setting")
+//                    }
+//                }
+                if(newState==RecyclerView.SCROLL_STATE_IDLE){
+                    //是否最后一条已经显示
+                    var layoutManager = recyclerView.layoutManager
+                    if (layoutManager is LinearLayoutManager){
+                        val manager:LinearLayoutManager = layoutManager
+                        var lastPosition =
+                            manager.findLastCompletelyVisibleItemPosition()
+                        if (lastPosition == adapter.itemCount-1){
+                            //最后一条已经显示
+                            loadMore(adapter.itemCount-1)
+
+                        }
+                    }
+
+                }
+            }
+
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                println("onScrolled dx=$dx dy=$dy")
+//            }
+        })
     }
 
 
@@ -89,6 +125,58 @@ class HomeFragment : BaseFragment() {
                 ThreadUtil.runOnMainThread(object :Runnable{
                     override fun run() {
                         adapter.updateList(list)
+                    }
+                })
+
+            }
+        })
+
+    }
+
+    /**
+     * 加载更多数据
+     */
+    private fun loadMore(offset:Int) {
+        val  path = URLProviderUtils.getHomeUrl(offset,2)
+
+        println("path=================="+path)
+
+        val client= OkHttpClient()
+        val request = Request.Builder()
+            .url(path)
+            .get()
+            .build()
+
+        println("request==============="+request)
+        /**
+         * 添加到队列中
+         */
+        client.newCall(request).enqueue(object :Callback{
+            /**
+             * 在子线程中调用
+             */
+            override fun onFailure(call: Call, e: IOException) {
+                //隐藏刷新控件
+                refreshLayout.isRefreshing = false
+                myToast("获取数据失败")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                refreshLayout.isRefreshing = false
+
+                myToast("获取数据成功")
+                val result = response.body?.string()
+                println("result===================="+result)
+
+                val goson = Gson()
+                val list=goson.fromJson<List<HomeItemBean>>(result,object :TypeToken<List<HomeItemBean>>(){}.type)
+
+                println("list=================="+list)
+                //刷新列表
+
+                ThreadUtil.runOnMainThread(object :Runnable{
+                    override fun run() {
+                        adapter.loadMore(list)
                     }
                 })
 
