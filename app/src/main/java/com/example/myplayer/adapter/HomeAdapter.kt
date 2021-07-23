@@ -14,20 +14,28 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
     /**
      * 更新数据
     */
-    fun updateList(list:List<HomeItemBean>){
-    this.list.clear()
-    this.list.addAll(list)
-        //notifyDataSetChanged方法强制listview调用getView来刷新每个Item的内容
-    notifyDataSetChanged()
-
+    fun updateList(list:List<HomeItemBean>?){
+//        if (list==null)return
+        /**
+         * let  扩展函数
+         */
+        list?.let {
+            this.list.clear()
+            this.list.addAll(list)
+            //notifyDataSetChanged方法强制listview调用getView来刷新每个Item的内容
+            notifyDataSetChanged()
+        }
     }
 
     /**
      * 加载更多
      */
-    fun loadMore(list:List<HomeItemBean>){
-        this.list.addAll(list)
-        notifyDataSetChanged()
+    fun loadMore(list:List<HomeItemBean>?){
+        list?.let {
+            this.list.addAll(list)
+            notifyDataSetChanged()
+        }
+
     }
 
 
