@@ -1,5 +1,6 @@
 package com.example.myplayer.ui.fragment
 
+import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myplayer.R
@@ -29,6 +30,16 @@ class HomeFragment : BaseFragment() {
 
         recycleView.adapter = adapter
 
+        //初始化下拉控件
+        refreshLayout.setColorSchemeColors(Color.RED,Color.YELLOW,Color.GREEN)
+
+        //刷新监听
+
+        refreshLayout.setOnRefreshListener {
+            //刷新的监听
+
+            loadDatas()
+        }
     }
 
 
@@ -57,10 +68,14 @@ class HomeFragment : BaseFragment() {
              * 在子线程中调用
              */
             override fun onFailure(call: Call, e: IOException) {
+                //隐藏刷新控件
+                refreshLayout.isRefreshing = false
                 myToast("获取数据失败")
             }
 
             override fun onResponse(call: Call, response: Response) {
+                refreshLayout.isRefreshing = false
+
                 myToast("获取数据成功")
                 val result = response.body?.string()
                 println("result===================="+result)

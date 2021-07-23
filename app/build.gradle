@@ -60,4 +60,8 @@ dependencies {
 //图片
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+    //下拉刷新
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
+
 }
