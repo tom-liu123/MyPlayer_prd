@@ -15,8 +15,8 @@ import java.io.IOException
 class NetManager private constructor(){
     val client by lazy { OkHttpClient() }
 
-    companion object{
-        val manager by lazy { NetManager }
+    companion object {
+        val manager by lazy { NetManager() }
     }
 
     /**
@@ -39,7 +39,7 @@ class NetManager private constructor(){
              * 在子线程中调用
              */
             override fun onFailure(call: Call, e: IOException) {
-               req.handler.onError(e?.message)
+               req.handler.onError(req.type,e?.message)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -51,7 +51,7 @@ class NetManager private constructor(){
 
                 ThreadUtil.runOnMainThread(object :Runnable{
                     override fun run() {
-                       req.handler.onSucess(parseResult)
+                       req.handler.onSucess(req.type,parseResult)
                     }
                 })
 

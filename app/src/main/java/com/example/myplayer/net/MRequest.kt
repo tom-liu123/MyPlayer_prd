@@ -8,7 +8,7 @@ import java.lang.reflect.ParameterizedType
 /**
  * 所有请求的基类
  */
-open class MRequest<RESPONSE>(val url:String,val handler: ResponseHandler<RESPONSE>) {
+open class MRequest<RESPONSE>(val type:Int,val url:String,val handler:ResponseHandler<RESPONSE>) {
     /**
      * 解析网络请求的结果
      */
@@ -20,6 +20,13 @@ open class MRequest<RESPONSE>(val url:String,val handler: ResponseHandler<RESPON
         val list=goson.fromJson<RESPONSE>(result,type)
         return list
 
+    }
+
+    /**
+     * 发送网络请求
+     */
+    fun excute(){
+        NetManager.manager.sendRequest(this)
     }
 
 
