@@ -15,15 +15,14 @@ import okhttp3.*
 import java.io.IOException
 
 class HomePresenterImpl(var homeView:HomeView):HomePresenter, ResponseHandler<List<HomeItemBean>> {
-    val TYPE_INIT_OR_REFRESH =1
-    val TYPE_LOAD_MORE = 2
+
     /**
      * 初始化数据或者刷新数据
      */
     override fun loadDatas() {
         //定义一个request
         //发送request
-        val request = HomeRequest(TYPE_INIT_OR_REFRESH,0,this).excute()
+        val request = HomeRequest(HomePresenter.TYPE_INIT_OR_REFRESH,0,this).excute()
 
         //发送request
 //        NetManager.manager.sendRequest(request)
@@ -74,7 +73,7 @@ class HomePresenterImpl(var homeView:HomeView):HomePresenter, ResponseHandler<Li
     override fun loadMore(offset: Int) {
 
         //发送request
-        val request = HomeRequest(TYPE_LOAD_MORE,offset,this).excute()
+        val request = HomeRequest(HomePresenter.TYPE_LOAD_MORE,offset,this).excute()
 
         //发送request
 //        NetManager.manager.sendRequest(request)
@@ -134,8 +133,8 @@ class HomePresenterImpl(var homeView:HomeView):HomePresenter, ResponseHandler<Li
         //区分初始化数据和加载更多数据
 
         when(type){
-            TYPE_INIT_OR_REFRESH ->homeView.loadSucess(result)
-            TYPE_LOAD_MORE ->homeView.loadMore(result)
+            HomePresenter.TYPE_INIT_OR_REFRESH ->homeView.loadSucess(result)
+            HomePresenter.TYPE_LOAD_MORE ->homeView.loadMore(result)
         }
 
     }
