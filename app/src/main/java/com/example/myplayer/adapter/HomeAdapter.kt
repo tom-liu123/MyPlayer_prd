@@ -17,7 +17,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
     fun updateList(list:List<HomeItemBean>?){
 //        if (list==null)return
         /**
-         * let  扩展函数
+         * let  给任意一个对象增加一个扩展函数
          */
         list?.let {
             this.list.clear()

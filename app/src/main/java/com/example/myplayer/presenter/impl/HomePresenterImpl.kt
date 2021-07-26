@@ -16,17 +16,15 @@ class HomePresenterImpl(var homeView:HomeView):HomePresenter {
      * 初始化数据或者刷新数据
      */
     override fun loadDatas() {
+        //定义一个request
+
+
         val  path = URLProviderUtils.getHomeUrl(0,2)
-
-        println("path=================="+path)
-
         val client= OkHttpClient()
         val request = Request.Builder()
             .url(path)
             .get()
             .build()
-
-        println("request==============="+request)
         /**
          * 添加到队列中
          */
@@ -103,6 +101,7 @@ class HomePresenterImpl(var homeView:HomeView):HomePresenter {
 
                 ThreadUtil.runOnMainThread(object :Runnable{
                     override fun run() {
+                        //将结果回调给view层
                         homeView.loadMore(list)
                     }
                 })

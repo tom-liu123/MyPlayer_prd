@@ -28,6 +28,10 @@ class HomeFragment : BaseFragment(), HomeView {
         return View.inflate(context, R.layout.fragment_home,null)
     }
 
+
+    /**
+     * 刷新的操作
+     */
     override fun initListener() {
         //初始化recycleview
         recycleView.layoutManager = LinearLayoutManager(context)
