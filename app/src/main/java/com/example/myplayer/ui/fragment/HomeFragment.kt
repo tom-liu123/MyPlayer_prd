@@ -62,6 +62,9 @@ class HomeFragment : BaseFragment(), HomeView {
 //                        println("setting")
 //                    }
 //                }
+                /**
+                 * 监听滑动事件，看滑动事件是否已经结束，并且判断是否是最后一条
+                 */
                 if(newState==RecyclerView.SCROLL_STATE_IDLE){
                     //是否最后一条已经显示
                     var layoutManager = recyclerView.layoutManager

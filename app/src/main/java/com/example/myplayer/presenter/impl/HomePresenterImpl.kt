@@ -14,15 +14,24 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import okhttp3.*
 import java.io.IOException
 
-class HomePresenterImpl(var homeView:HomeView):HomePresenter, ResponseHandler<List<HomeItemBean>> {
+class HomePresenterImpl(var homeView:HomeView?):HomePresenter, ResponseHandler<List<HomeItemBean>> {
+    /**
+     * 解绑view和presenter层的操作
+     */
+    fun destoryView(){
+        if(homeView!=null){
+            homeView =null
+        }
+
+    }
 
     /**
      * 初始化数据或者刷新数据
      */
     override fun loadDatas() {
         //定义一个request
-        //发送request
-        val request = HomeRequest(HomePresenter.TYPE_INIT_OR_REFRESH,0,this).excute()
+        //.excute()发送request
+        HomeRequest(HomePresenter.TYPE_INIT_OR_REFRESH,0,this).excute()
 
         //发送request
 //        NetManager.manager.sendRequest(request)
@@ -73,7 +82,7 @@ class HomePresenterImpl(var homeView:HomeView):HomePresenter, ResponseHandler<Li
     override fun loadMore(offset: Int) {
 
         //发送request
-        val request = HomeRequest(HomePresenter.TYPE_LOAD_MORE,offset,this).excute()
+        HomeRequest(HomePresenter.TYPE_LOAD_MORE,offset,this).excute()
 
         //发送request
 //        NetManager.manager.sendRequest(request)
@@ -126,15 +135,15 @@ class HomePresenterImpl(var homeView:HomeView):HomePresenter, ResponseHandler<Li
 
     override fun onError(type:Int,msg: String?) {
 
-        homeView.onError(msg)
+        homeView?.onError(msg)
     }
 
     override fun onSucess(type:Int,result: List<HomeItemBean>) {
         //区分初始化数据和加载更多数据
 
         when(type){
-            HomePresenter.TYPE_INIT_OR_REFRESH ->homeView.loadSucess(result)
-            HomePresenter.TYPE_LOAD_MORE ->homeView.loadMore(result)
+            HomePresenter.TYPE_INIT_OR_REFRESH ->homeView?.loadSucess(result)
+            HomePresenter.TYPE_LOAD_MORE ->homeView?.loadMore(result)
         }
 
     }
