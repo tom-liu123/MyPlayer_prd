@@ -28,7 +28,7 @@ public class URLProviderUtils {
 //                + "&v=4&rn=640*540";
 
         String url ="http://10.16.244.196:8088/api/info/oneMe?userId=" +
-                "10052198";
+                "10052198"+ "&offset=" + offset+ "&size=" + size;
         Log.i("Main_url", url);
         return url;
     }
@@ -67,19 +67,22 @@ public class URLProviderUtils {
     }
 
     public static String getYueDanUrl(int offset, int size) {
-        String url = "http://mapi.yinyuetai.com/playlist/list.json?deviceinfo="
-                + "{\"aid\":\"10201036\",\"os\":\"Android\","
-                + "\"ov\":" + "\"" + getSystemVersion() + "\"" + ","
-                + "\"rn\":\"480*800\","
-                + "\"dn\":" + "\"" + getPhoneModel() + "\"" + ","
-                + "\"cr\":\"46000\","
-                + "\"as\":"
-                + "\"WIFI\","
-                + "\"uid\":"
-                + "\"dbcaa6c4482bc05ecb0bf39dabf207d2\","
-                + "\"clid\":110025000}"
-                + "&offset=" + offset
-                + "&size=" + size;
+//        String url = "http://mapi.yinyuetai.com/playlist/list.json?deviceinfo="
+//                + "{\"aid\":\"10201036\",\"os\":\"Android\","
+//                + "\"ov\":" + "\"" + getSystemVersion() + "\"" + ","
+//                + "\"rn\":\"480*800\","
+//                + "\"dn\":" + "\"" + getPhoneModel() + "\"" + ","
+//                + "\"cr\":\"46000\","
+//                + "\"as\":"
+//                + "\"WIFI\","
+//                + "\"uid\":"
+//                + "\"dbcaa6c4482bc05ecb0bf39dabf207d2\","
+//                + "\"clid\":110025000}"
+//                + "&offset=" + offset
+//                + "&size=" + size;
+
+        String url ="http://10.16.244.196:8088/api/info/one?userId=" +
+                "10052198"+ "&offset=" + offset+ "&size=" + size;
         return url;
     }
 
