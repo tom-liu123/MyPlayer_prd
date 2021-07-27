@@ -1,18 +1,10 @@
 package com.example.myplayer.presenter.impl
 
 import com.example.myplayer.net.HomeRequest
-import com.example.myplayer.net.NetManager
 import com.example.myplayer.net.ResponseHandler
 import com.example.myplayer.presenter.interf.HomePresenter
-import com.example.myplayer.util.ThreadUtil
-import com.example.myplayer.util.URLProviderUtils
 import com.example.myplayer.view.HomeView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.itheima.player.model.bean.HomeItemBean
-import kotlinx.android.synthetic.main.fragment_home.*
-import okhttp3.*
-import java.io.IOException
 
 class HomePresenterImpl(var homeView:HomeView?):HomePresenter, ResponseHandler<List<HomeItemBean>> {
     /**

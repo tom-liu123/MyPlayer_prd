@@ -8,24 +8,16 @@ import com.example.myplayer.R
 import com.example.myplayer.adapter.HomeAdapter
 import com.example.myplayer.base.BaseFragment
 import com.example.myplayer.presenter.impl.HomePresenterImpl
-import com.example.myplayer.util.ThreadUtil
-import com.example.myplayer.util.URLProviderUtils
 import com.example.myplayer.view.HomeView
-import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonParser
-import com.google.gson.reflect.TypeToken
 import com.itheima.player.model.bean.HomeItemBean
-import kotlinx.android.synthetic.main.fragment_home.*
-import okhttp3.*
-import java.io.IOException
+import kotlinx.android.synthetic.main.fragment_list.*
 
 class HomeFragment : BaseFragment(), HomeView {
     //适配
     val adapter by lazy { HomeAdapter() }
     val presenter by lazy { HomePresenterImpl(this) }
     override fun initView(): View? {
-        return View.inflate(context, R.layout.fragment_home,null)
+        return View.inflate(context, R.layout.fragment_list,null)
     }
 
 
