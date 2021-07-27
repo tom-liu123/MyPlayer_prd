@@ -17,8 +17,12 @@ class YueDanAdapter: RecyclerView.Adapter<YueDanAdapter.YueDanHolder>() {
     //更新的方法
     fun updateList(list:List<YueDanBean.PlayListsBean>?){
         list?.let {
+
+            println("list==============================>"+list)
             this.list.clear()
             this.list.addAll(list)
+
+            println("list==============================>"+list)
             /**
              * 把当前列表刷新一下
              */
@@ -36,6 +40,11 @@ class YueDanAdapter: RecyclerView.Adapter<YueDanAdapter.YueDanHolder>() {
     }
 
     override fun onBindViewHolder(holder: YueDanHolder, position: Int) {
+        var data1 = list.get(position)
+        //view
+        var itemView = holder?.itemView as YueDanItemView
+        //view+data
+        itemView.setData(data1)
     }
 
     override fun getItemCount(): Int {
