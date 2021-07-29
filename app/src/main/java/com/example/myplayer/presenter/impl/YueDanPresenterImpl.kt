@@ -13,6 +13,7 @@ YueDanRequest(YueDanPresenter.TYPE_INIT_OR_REFRESH,0,this).excute()
     }
 
     override fun loadMore(offset: Int) {
+        YueDanRequest(YueDanPresenter.TYPE_LOAD_MORE,offset,this).excute()
 
     }
 
@@ -23,6 +24,8 @@ YueDanRequest(YueDanPresenter.TYPE_INIT_OR_REFRESH,0,this).excute()
     override fun onSucess(type: Int, result: YueDanBean) {
         if (type==YueDanPresenter.TYPE_INIT_OR_REFRESH){
             yuedanView.loadSucess(result)
+        }else if (type == YueDanPresenter.TYPE_LOAD_MORE){
+            yuedanView.loadMore(result)
         }
 
     }
